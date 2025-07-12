@@ -79,10 +79,10 @@ def main():
     print("Player would then, draw 5 cards,")
     print("Dealer would then draw the 4 remianing hidden cards")
     print("Player can throw a dice, and draw the amount of cards as a result.")
-    print("As a reward, player can reveal the amount of the dealers cards by half of the dice result, but only once")
+    print("As a reward, player can reveal two of the dealers cards, but only once")
     print("Player can draw as much cards as he like depending on how much guts he has, but if you go over 69")
     print("The game would automatically show hands and if both of you bust")
-    print("No score would be recorded")
+    print("Dealer automatically wins if you bust")
 
     #future versions would include an actual bet lol
 
