@@ -93,6 +93,7 @@ def main():
     dscore= 0
     playername = 'aa'#str(input("What should we call you? "))
 
+    input("Press any key to start the game!")
     #this would be the main loop
     while True:
     #start intializing game environment
