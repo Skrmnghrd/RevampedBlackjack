@@ -34,6 +34,11 @@ class Player:
         [return_me.append("X") for x in range((len(self.cards) - amount))]
         return return_me
 
+    def addcards(self, cards):
+        #ex
+        #dealer.addcards(deck.draw(5))
+        #cards would be an array
+        [self.cards.append(x) for x in cards]
 
 class Deck:
 
@@ -97,28 +102,33 @@ def main():
     #this would be the main loop
     while True:
     #start intializing game environment
+        #we initialize variables again
         reveal_card = 5
         player = Player(name=playername)
         dealer = Player(name="Dealer")
         deck = Deck()
      
         clear()
-        #first initial draw
-        print("Inital dealer draw...")
-        [dealer.cards.append(x) for x in deck.draw(5)]    
+        #first initial dealer draw
+        print("Inital dealer draw...")   
+        dealer.addcards(deck.draw(5))
         print("Dealer cards {}: {} Total:{}".format(len(dealer.cards),dealer.cards, dealer.calculate()))
         
         #initial player draw
         print("Initial player draw...")
-        [player.cards.append(x) for x in deck.draw(5)]
+        player.addcards(deck.draw(5))
         print("Player cards {}: {} Total:{}".format(len(player.cards), player.cards, player.calculate()) )
-        print("Dealer draws remaining cards")
-        [dealer.cards.append(x) for x in deck.draw(4)]
+        
+        #dealer final draw
+        print("Dealer draws remaining cards") 
+        dealer.addcards(deck.draw(5))
     #end of initial game phase
         
         while True:
             if (player.calculate() > 69):
+                clear()
                 print("You busted! {}\nGrand Total of:{}".format(player.show_cards(amount=len(player.cards))  ,player.calculate(amount=len(player.cards))))
+                print("Dealer cards {}: {} Total:{}".format(len(dealer.cards),dealer.show_cards(amount=len(dealer.cards)), dealer.calculate(amount=len(dealer.cards))))
                 dscore += 1
                 print("Score: Player:{}\t Dealer:{}".format(str(score), str(dscore)))
                 input("Press any key to continue:")
@@ -143,16 +153,23 @@ def main():
             match decision:
                 case 1:
                     print("Drawing ONE card...")
-                    [player.cards.append(x) for x in deck.draw(1)]
+                    #[player.cards.append(x) for x in deck.draw(1)]
+                    player.addcards(deck.draw(1))
                 case 2:
                     diceroll = rolldice()
                     print("Rolling dice!...{}!".format(diceroll))
-                    [player.cards.append(x) for x in deck.draw(diceroll)]
+                    #[player.cards.append(x) for x in deck.draw(diceroll)]
+                    player.addcards(deck.draw(diceroll))
                     reveal_card = 7
                 case 3: 
+
                     print("Dealer cards {}: {} Total:{}".format(len(dealer.cards),dealer.show_cards(amount=len(dealer.cards)), dealer.calculate(amount=len(dealer.cards))))
                     print("Your cards {}: {} Total:{}".format(len(player.cards),player.show_cards(len(player.cards)), player.calculate()))
-                    if player.calculate() > dealer.calculate():
+                    if (dealer.calculate() > 69):
+                        print("You caught the dealer busting!")
+                        print("You won!")
+                        score += 1
+                    elif (player.calculate() > dealer.calculate()):
                         print("You won!")
                         score += 1
                     else:
@@ -160,6 +177,7 @@ def main():
                         dscore += 1
                     print("Score: Player:{}\t Dealer:{}".format(str(score), str(dscore)))
                     input("Press any key to continue")
+                    break
                 case 99:
                     print("Thanks for playing :**")
                     exit()
