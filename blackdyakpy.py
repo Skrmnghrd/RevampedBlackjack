@@ -141,7 +141,7 @@ def main():
             while True:
             #start get input loop
                 try:
-                    decision = int(input("\nWhat would be your move? 1. Draw a card. 2. Roll the dice. 3.Show hands. 99 to exit:"))
+                    decision = int(input("\nWhat would be your move? \n1. Draw a card. \n2. Roll the dice. \n3. Show hands. \n99. to exit:"))
                     clear()
                     break
                 except ValueError:
@@ -162,7 +162,6 @@ def main():
                     player.addcards(deck.draw(diceroll))
                     reveal_card = 7
                 case 3: 
-
                     print("Dealer cards {}: {} Total:{}".format(len(dealer.cards),dealer.show_cards(amount=len(dealer.cards)), dealer.calculate(amount=len(dealer.cards))))
                     print("Your cards {}: {} Total:{}".format(len(player.cards),player.show_cards(len(player.cards)), player.calculate()))
                     if (dealer.calculate() > 69):
